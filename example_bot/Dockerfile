@@ -11,11 +11,19 @@ RUN apt-get install -y --no-install-recommends \
     wget \
     zlib1g-dev
 
-# get and build wt4
+# get and build reo7sp/tgbot-cpp
 WORKDIR /root
 RUN wget https://github.com/reo7sp/tgbot-cpp/archive/v1.2.1.tar.gz
 RUN tar zxf v1.2.1.tar.gz
 WORKDIR /root/tgbot-cpp-1.2.1/build
+RUN cmake -DCMAKE_BUILD_TYPE=Release ..
+RUN make -j4 install
+
+# get and build heroku_webserver_cpp
+WORKDIR /root
+RUN wget https://github.com/DevInCube/heroku_webserver_cpp/archive/v0.1.tar.gz
+RUN tar zxf v0.1.tar.gz
+WORKDIR /root/heroku_webserver_cpp-0.1/heroku_webserver_cpp/build
 RUN cmake -DCMAKE_BUILD_TYPE=Release ..
 RUN make -j4 install
 
